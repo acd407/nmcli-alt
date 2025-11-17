@@ -236,6 +236,13 @@ int main(int argc, char *argv[]) {
                 // Handle "nmcli connection up" command
                 if (i + 2 < argc) {
                     std::string ssid = argv[i + 2];
+
+                    // Check for optional [id|uuid] parameter
+                    if ((ssid == "id" || ssid == "uuid") && i + 3 < argc) {
+                        // If the next argument is "id" or "uuid", then the actual SSID is the one after that
+                        ssid = argv[i + 3];
+                    }
+
                     if (nm.activateConnection(ssid)) {
                         std::cout << "Connection '" << ssid << "' activated successfully" << std::endl;
                         return 0;
@@ -251,6 +258,13 @@ int main(int argc, char *argv[]) {
                 // Handle "nmcli connection down" command
                 if (i + 2 < argc) {
                     std::string ssid = argv[i + 2];
+
+                    // Check for optional [id|uuid] parameter
+                    if ((ssid == "id" || ssid == "uuid") && i + 3 < argc) {
+                        // If the next argument is "id" or "uuid", then the actual SSID is the one after that
+                        ssid = argv[i + 3];
+                    }
+
                     if (nm.deactivateConnection(ssid)) {
                         std::cout << "Connection '" << ssid << "' deactivated successfully" << std::endl;
                         return 0;
@@ -266,6 +280,13 @@ int main(int argc, char *argv[]) {
                 // Handle "nmcli connection delete" command
                 if (i + 2 < argc) {
                     std::string ssid = argv[i + 2];
+
+                    // Check for optional [id|uuid] parameter
+                    if ((ssid == "id" || ssid == "uuid") && i + 3 < argc) {
+                        // If the next argument is "id" or "uuid", then the actual SSID is the one after that
+                        ssid = argv[i + 3];
+                    }
+
                     if (nm.deleteConnection(ssid)) {
                         std::cout << "Connection '" << ssid << "' deleted successfully" << std::endl;
                         return 0;
